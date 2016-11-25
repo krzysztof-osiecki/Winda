@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class ElevatorForm extends javax.swing.JFrame {
 
+  private MainWindow mainWindow;
+
   /**
    * Creates new form ElevatorForm
    */
@@ -98,23 +100,30 @@ public class ElevatorForm extends javax.swing.JFrame {
   private final List<Integer> floors = Arrays.asList(464, 414, 364, 314, 264, 214, 164, 114, 64, 14);
 
   void startMoving (int floor, int mass) {
-    final Elevator elevator = new Elevator(464, floors.get(floor-1), mass, 1);
+    final Elevator elevator = new Elevator(464, floors.get(floor - 1), mass, 1);
     Thread animationThread = new Thread(() -> {
       while (!end) { //450 jednostek ruchu
         final Point location = elevatorLabel.getLocation(); //start y = 464
         if (location.getY() < floors.get(floor - 1)) {
           end = true;
         }
-        location.setLocation(location.getX(), location.getY() - elevator.calculateMovement());
+        final double calculateMovement = elevator.calculateMovement();
+        if(calculateMovement == 0) end = true;
+        location.setLocation(location.getX(), location.getY() - calculateMovement);
         elevatorLabel.setLocation(location);
+        mainWindow.updateLabels(elevator);
         repaint();
         try {
-          Thread.sleep(10);
+          Thread.sleep(50);
         } catch (InterruptedException ex) {
           System.out.println("Przerwanie" + ex);
         }
       }
     });
     animationThread.start();
+  }
+
+  void setMainWindow (MainWindow aThis) {
+    this.mainWindow = aThis;
   }
 }

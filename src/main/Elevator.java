@@ -20,7 +20,7 @@ public class Elevator {
     Map<Mass, Force> close = new HashMap<>();
     close.put(Mass.BIG, Force.SLOWER);
     close.put(Mass.MEDIUM, Force.SLOWER);
-    close.put(Mass.SMALL, Force.KEEPUP);
+    close.put(Mass.SMALL, Force.SLOWER);
     Map<Mass, Force> medium = new HashMap<>();
     medium.put(Mass.BIG, Force.KEEPUP);
     medium.put(Mass.MEDIUM, Force.SLOWER);
@@ -41,6 +41,9 @@ public class Elevator {
   private final int elevatorMass;
   private int currFloor;
   private double speed;
+  private int currDistance;
+  private double calculatedForce;
+  private double acceleration;
   private Map<Mass, Double> massAffiliation = new HashMap<>();
 //  </editor-fold>
 
@@ -65,15 +68,15 @@ public class Elevator {
     return min;
   }
 
-  private enum Distance {
+  protected enum Distance {
     CLOSE, MEDIUM, FAR
   }
 
-  private enum Mass {
+  protected enum Mass {
     SMALL, MEDIUM, BIG
   }
 
-  private enum Force {
+  protected enum Force {
     FASTER, KEEPUP, SLOWER
   }
 //  </editor-fold>
@@ -108,14 +111,16 @@ public class Elevator {
 
 //  <editor-fold desc="API">
   public double calculateMovement () {
-    int currDistance = currFloor - destFloor;
+    currDistance = currFloor - destFloor;
+    currDistance = currDistance < 0  ? 0 : currDistance;
+    if(currDistance == 0) return 0;
     fuzzAndAggregate(currDistance);
     final Map<Force, Double> activationLevels = calculateActivationLevels();
-    double calculatedForce = calculateForce(activationLevels);
-    double acceleration = calculatedForce / (double) (elevatorMass + 50);
+    calculatedForce = calculateForce(activationLevels);
+    acceleration = calculatedForce / (double) (elevatorMass + 50);
     speed = min(5, speed + acceleration);
     speed = speed < 1 ? 1 : speed;
-    currFloor -= speed;
+    currFloor = (int) Math.floor(currFloor - speed + 0.5);
     System.out.println("Current speed: " + speed);
     return speed;
   }
@@ -160,12 +165,12 @@ public class Elevator {
         aggregatedKnowledge.get(Distance.CLOSE).get(Mass.BIG),
         aggregatedKnowledge.get(Distance.CLOSE).get(Mass.MEDIUM),
         aggregatedKnowledge.get(Distance.MEDIUM).get(Mass.MEDIUM),
-        aggregatedKnowledge.get(Distance.MEDIUM).get(Mass.SMALL)
+        aggregatedKnowledge.get(Distance.MEDIUM).get(Mass.SMALL),
+        aggregatedKnowledge.get(Distance.CLOSE).get(Mass.SMALL)
       )
     );
     activationLevel.put(Force.KEEPUP,
       max(
-        aggregatedKnowledge.get(Distance.CLOSE).get(Mass.SMALL),
         aggregatedKnowledge.get(Distance.MEDIUM).get(Mass.BIG)
       )
     );
@@ -287,4 +292,27 @@ public class Elevator {
     return (40 - force) / (double) (40 - 20);
   }
 //  </editor-fold>
+
+//  <editor-fold desc="Getters"
+  public Map<Distance, Map<Mass, Double>> getAggregatedKnowledge () {
+    return aggregatedKnowledge;
+  }
+
+  public double getSpeed () {
+    return speed;
+  }
+
+  public int getCurrDistance () {
+    return currDistance;
+  }
+
+  public double getCalculatedForce () {
+    return calculatedForce;
+  }
+
+  public double getAcceleration () {
+    return acceleration;
+  }
+//  <editor-fold>
+
 }
