@@ -34,25 +34,90 @@ public class ElevatorForm extends javax.swing.JFrame {
   private void initComponents() {
 
     elevatorLabel = new javax.swing.JLabel();
+    jLabel1 = new javax.swing.JLabel();
+    jLabel2 = new javax.swing.JLabel();
+    jLabel3 = new javax.swing.JLabel();
+    jLabel4 = new javax.swing.JLabel();
+    jLabel5 = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
+    jLabel7 = new javax.swing.JLabel();
+    jLabel8 = new javax.swing.JLabel();
+    jLabel9 = new javax.swing.JLabel();
+    jLabel10 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
     elevatorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/winda.jpg"))); // NOI18N
+
+    jLabel1.setText("Pietro 1");
+
+    jLabel2.setText("Pietro 2");
+
+    jLabel3.setText("Pietro 3");
+
+    jLabel4.setText("Pietro 4");
+
+    jLabel5.setText("Pietro 5");
+
+    jLabel6.setText("Pietro 6");
+
+    jLabel7.setText("Pietro 7");
+
+    jLabel8.setText("Pietro 8");
+
+    jLabel9.setText("Pietro 9");
+
+    jLabel10.setText("Pietro 10");
+    jLabel10.setLocation(jLabel1.getLocation().x, 14);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGap(162, 162, 162)
+        .addGap(48, 48, 48)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(jLabel10)
+          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLabel8)
+            .addComponent(jLabel9)
+            .addComponent(jLabel7)
+            .addComponent(jLabel6)
+            .addComponent(jLabel5)
+            .addComponent(jLabel4)
+            .addComponent(jLabel3)
+            .addComponent(jLabel2)
+            .addComponent(jLabel1)))
+        .addGap(74, 74, 74)
         .addComponent(elevatorLabel)
-        .addContainerGap(188, Short.MAX_VALUE))
+        .addContainerGap(185, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(464, Short.MAX_VALUE)
-        .addComponent(elevatorLabel)
+        .addContainerGap(87, Short.MAX_VALUE)
+        .addComponent(jLabel10)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel9)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel8)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel7)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel6)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel5)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel4)
+        .addGap(34, 34, 34)
+        .addComponent(jLabel3)
+        .addGap(28, 28, 28)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel2)
+            .addGap(34, 34, 34)
+            .addComponent(jLabel1))
+          .addComponent(elevatorLabel))
         .addContainerGap())
     );
 
@@ -94,6 +159,16 @@ public class ElevatorForm extends javax.swing.JFrame {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel elevatorLabel;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel10;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
+  private javax.swing.JLabel jLabel8;
+  private javax.swing.JLabel jLabel9;
   // End of variables declaration//GEN-END:variables
 
   private boolean end = false;
